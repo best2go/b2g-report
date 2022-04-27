@@ -8,7 +8,7 @@ php:
   - "8.1"
 
 env:
-  - XDEBUG_MODE = coverage
+  - XDEBUG_MODE=coverage
 
 #matrix:
 #  include:
@@ -28,9 +28,10 @@ before_script:
 
 script:
   - mkdir -p build/logs
-  - phpunit --coverage-text
+  - phpunit --coverage-text --coverage-clover=coverage.xml
 
-#after_success:
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 #  - travis_retry php vendor/bin/php-coveralls
 
 cache:
