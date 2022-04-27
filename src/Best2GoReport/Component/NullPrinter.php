@@ -4,7 +4,7 @@ namespace Best2Go\Best2GoReport\Component;
 
 use Best2Go\Best2GoReport\Interfaces\PrinterInterface;
 use Best2Go\Best2GoReport\Interfaces\ReportEngineInterface;
-use Generator;
+use Traversable;
 
 class NullPrinter implements PrinterInterface
 {
@@ -16,7 +16,7 @@ class NullPrinter implements PrinterInterface
         // noop!
     }
 
-    public function flush(): iterable
+    public function flush(): Traversable
     {
         $buffer = array_merge($this->buffer, $this->post);
         $this->buffer = [];
