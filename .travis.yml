@@ -1,0 +1,35 @@
+dist: trusty
+
+language: php
+
+sudo: false
+
+php:
+  - '7.2'
+  - '7.4'
+  - '8.1'
+
+before-install:
+  - composer --no-interaction self-update
+
+before_script:
+  - composer --no-interaction config platform.php $TRAVIS_PHP_VERSION
+  #- composer config platform.php version-name
+  - composer --no-interaction update
+  #- phpenv version-name | grep ^5.[34] && echo "extension=apc.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini ; true
+  #- phpenv version-name | grep ^5.[34] && echo "apc.enable_cli=1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini ; true
+
+script:
+  - mkdir -p build/logs
+  - php vendor/bin/phpunit
+
+after_success:
+  - travis_retry php vendor/bin/php-coveralls
+
+cache:
+  directories:
+    - $COMPOSER_CACHE_DIR
+    #- "$HOME/.composer/cache/files"
+
+git:
+  depth: 5
