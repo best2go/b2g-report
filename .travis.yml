@@ -11,6 +11,7 @@ php:
 
 before-install:
   - composer --no-interaction self-update
+  - composer --no-interaction config --list
 
 before_script:
   - composer --no-interaction config platform.php $TRAVIS_PHP_VERSION
@@ -28,8 +29,8 @@ script:
 
 cache:
   directories:
-    - $COMPOSER_CACHE_DIR
-    #- "$HOME/.composer/cache/files"
+    - "$HOME/.composer/cache/files"
+    #- $COMPOSER_CACHE_DIR
 
 git:
   depth: 5
