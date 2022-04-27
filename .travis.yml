@@ -15,7 +15,7 @@ before-install:
 
 before_script:
   - composer --no-interaction config platform.php $TRAVIS_PHP_VERSION
-  #- composer config platform.php version-name
+  #- composer config platform.php <version-name>
   - composer --no-interaction update
   #- phpenv version-name | grep ^5.[34] && echo "extension=apc.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini ; true
   #- phpenv version-name | grep ^5.[34] && echo "apc.enable_cli=1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini ; true
