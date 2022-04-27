@@ -9,6 +9,9 @@ php:
   - '7.4'
   - '8.1'
 
+env:
+  - XDEBUG_MODE=coverage
+
 before-install:
   - composer --no-interaction self-update
   - composer --no-interaction config --list
