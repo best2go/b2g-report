@@ -1,16 +1,16 @@
 dist: bionic
-
 language: php
-
 sudo: false
 
 php:
-  - '7.2'
-  - '7.4'
-  - '8.1'
+  - "7.2"
+  - "7.4"
+  - "8.1"
 
-env:
-  - XDEBUG_MODE=coverage
+matrix:
+  include:
+    - php: "8.1"
+      env: XDEBUG_MODE=coverage
 
 before-install:
   - composer --no-interaction self-update
@@ -36,3 +36,7 @@ cache:
 
 git:
   depth: 5
+
+notifications:
+  email:
+    - "nick.lavrik@gmail.com"
