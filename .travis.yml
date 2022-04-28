@@ -32,7 +32,7 @@ before_script:
 
 script:
   - mkdir -p build/logs
-  - phpunit --coverage-text --coverage-clover=coverage.xml
+  - phpunit --testdox-text --coverage-text --coverage-clover=coverage.xml
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
