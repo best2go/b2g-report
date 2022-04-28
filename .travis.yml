@@ -8,9 +8,11 @@ sudo: false
 #  - "8.1"
 
 env:
-  - XDEBUG_MODE=coverage
+  global:
+    - SYMFONY_PHPUNIT_DIR=$HOME/.symfony-phpunit
 
 matrix:
+  fast_finish: true
   include:
     - php: "7.2"
     - php: "7.4"
@@ -38,7 +40,9 @@ after_success:
 
 cache:
   directories:
-    - "$HOME/.composer/cache/files"
+    - vendor
+    - $HOME/.symfony-phpunit
+    - $HOME/.composer/cache/files
 
 git:
   depth: 5
