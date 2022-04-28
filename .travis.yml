@@ -2,18 +2,22 @@ dist: bionic
 language: php
 sudo: false
 
-php:
-  - "7.2"
-  - "7.4"
-  - "8.1"
+#php:
+#  - "7.2"
+#  - "7.4"
+#  - "8.1"
 
 env:
-  - XDEBUG_MODE=coverage
+  global:
+    - SYMFONY_PHPUNIT_DIR=$HOME/.symfony-phpunit
 
-#matrix:
-#  include:
-#    - php: "8.1"
-#      env: XDEBUG_MODE=coverage
+matrix:
+  fast_finish: true
+  include:
+    - php: "7.2"
+    - php: "7.4"
+    - php: "8.1"
+      env: XDEBUG_MODE=coverage
 
 before-install:
   - composer --no-interaction self-update
@@ -28,7 +32,7 @@ before_script:
 
 script:
   - mkdir -p build/logs
-  - phpunit --coverage-text --coverage-clover=coverage.xml
+  - phpunit --testdox --coverage-text --coverage-clover=coverage.xml
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
@@ -36,7 +40,9 @@ after_success:
 
 cache:
   directories:
-    - "$HOME/.composer/cache/files"
+    - vendor
+    - $HOME/.symfony-phpunit
+    - $HOME/.composer/cache/files
 
 git:
   depth: 5
