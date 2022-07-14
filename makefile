@@ -22,7 +22,7 @@ all: $(addprefix phpunit-,$(PHP_MATRIX))
 .PHONY: phpunit-%
 phpunit-%: info-% update-%
 	$(DOCKER_RUN) php:$*-cli-alpine vendor/bin/phpunit $(CMD_ARGS)
-	# composer config --unset platform
+	$(DOCKER_RUN) composer config --unset platform
 
 .PHONY: info-%
 info-%:

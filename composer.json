@@ -32,8 +32,5 @@
         "phpunit": "./vendor/bin/phpunit -vd memory_limit=-1"
     },
     "config": {
-        "platform": {
-            "php": "8.1"
-        }
     }
 }
