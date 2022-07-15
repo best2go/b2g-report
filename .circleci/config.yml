@@ -42,6 +42,7 @@ jobs:
       #- run: sudo docker-php-ext-install zip
 
       - run: apk --help || true
+      - run: apk add composer
       - run: sudo pecl install pcov
       - run: sudo -E docker-php-ext-enable pcov
       - run: php -v
