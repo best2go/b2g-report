@@ -2,16 +2,26 @@
 # See: https://circleci.com/docs/2.0/language-php/
 version: 2
 
+#executors:
+#  docker: # Docker using the Base Convenience Image
+#    docker:
+#      - image: php:$*-cli-alpine
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
+
   build:
+#    machine:
+#      docker: ubuntu-2004:2022.04.1
+
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
     docker:
       # Specify the version you desire here
       #- image: circleci/php:7.4-node-browsers # legacy
-      - image: cimg/php:7.4.26
+      #- image: cimg/php:7.4.26
+      - image: cimg/php:8.1
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -38,7 +48,8 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: composer config platform.php 7.4
+      - run: php -v
+      - run: composer config platform.php 8.1
       - run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
       - save_cache:
@@ -63,4 +74,6 @@ jobs:
       #- run: ./vendor/bin/phpunit
       #- run: ./vendor/bin/codecept build
       #- run: ./vendor/bin/codecept run
-      - run: ./vendor/bin/phpunit
+
+      - run: mkdir -p build/logs
+      - run: ./vendor/bin/phpunit --testdox --coverage-text --coverage-clover=coverage.xml
