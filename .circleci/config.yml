@@ -43,7 +43,7 @@ jobs:
 
       - run: apk --help || true
       - run: whoami
-      - run: apk add composer
+      - run: apk add composer libxml2-dev
       #- run: pecl install pcov
       #- run: docker-php-ext-enable pcov
       - run: docker-php-ext-install dom
