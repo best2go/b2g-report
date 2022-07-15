@@ -42,6 +42,7 @@ jobs:
       #- run: sudo docker-php-ext-install zip
 
       - run: php -v
+      - run: apk add composer
       - run: composer config platform.php 8.1
 
       # Download and cache dependencies
