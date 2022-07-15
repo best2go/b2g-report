@@ -75,7 +75,7 @@ jobs:
       #- run: ./vendor/bin/codecept build
       #- run: ./vendor/bin/codecept run
 
-      - run: mkdir -p build/logs
-      - run: ./vendor/bin/phpunit --testdox --coverage-text --coverage-clover=./build/logs/coverage.xml --log-junit ./build/logs/junit.xml
+      - run: mkdir -p ./build/logs
+      - run: ./vendor/bin/phpunit --testdox --coverage-text --coverage-clover ./build/logs/coverage.xml --log-junit ./build/logs/junit.xml
       - store_test_results:
-          path: build/logs
+          path: ./build/logs
