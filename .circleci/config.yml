@@ -41,7 +41,7 @@ jobs:
       #- run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       #- run: sudo docker-php-ext-install zip
 
-      - run: apk add composer
+      - run: apk install php8.1-common php8.1-dom xdebug composer
       - run: php -v
       - run: php -m
       - run: composer config platform.php 8.1
