@@ -40,6 +40,9 @@ jobs:
       #- run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       #- run: sudo docker-php-ext-install zip
 
+      - run: php -v
+      - run: composer config platform.php 8.1
+
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -48,8 +51,6 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: php -v
-      - run: composer config platform.php 8.1
       - run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
       - save_cache:
