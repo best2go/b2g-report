@@ -42,9 +42,10 @@ jobs:
       #- run: sudo docker-php-ext-install zip
 
       - run: apk --help || true
+      - run: whoami
       - run: apk add composer
-      - run: sudo pecl install pcov
-      - run: sudo -E docker-php-ext-enable pcov
+      - run: pecl install pcov
+      - run: docker-php-ext-enable pcov
       - run: php -v
       - run: php -m
       - run: composer config platform.php 8.1
