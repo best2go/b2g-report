@@ -12,8 +12,8 @@ version: 2
 jobs:
 
   build:
-#    machine:
-#      docker: ubuntu-2004:2022.04.1
+    #    machine:
+    #      docker: ubuntu-2004:2022.04.1
 
     # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
@@ -22,7 +22,6 @@ jobs:
       #- image: circleci/php:7.4-node-browsers # legacy
       #- image: cimg/php:7.4.26
       - image: cimg/php:8.1
-      #- image: php:8.1-cli-alpine
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -38,24 +37,12 @@ jobs:
     steps:
       - checkout
 
-      #- run: sudo apt update # PHP CircleCI 2.0 Configuration File# PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
+      #- run: sudo apt update # PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       #- run: sudo docker-php-ext-install zip
 
-      - run: apk --help || true
-      - run: whoami
-      #- run: apk add composer libxml2-dev php-xml
-      #- run: docker-php-ext-install dom
-      #- run: docker-php-ext-enable dom
       - run: php -v
-      #- run: |
-      #    pecl install xdebug \
-      #    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
-      #    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-      #    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
-      - run: pecl install pcov && docker-php-ext-enable pcov
       - run: php -m
-
-      #- run: composer config platform.php 8.1
+      - run: composer config platform.php 8.1
 
       # Download and cache dependencies
       - restore_cache:
@@ -65,8 +52,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: composer update --prefer-dist --no-progress --optimize-autoloader
-      #- run: composer install --prefer-dist --no-progress --optimize-autoloader
+      - run: composer install --prefer-dist --no-progress --no-suggest --optimize-autoloader
 
       - save_cache:
           key: v1-dependencies-{{ checksum "composer.json" }}
