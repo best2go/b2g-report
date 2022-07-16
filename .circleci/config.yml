@@ -37,6 +37,9 @@ jobs:
     steps:
       - checkout
 
+      - run: sudo pecl install pcov
+      - run: sudo composer selfupdate
+
       #- run: sudo apt update # PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       #- run: sudo docker-php-ext-install zip
 
