@@ -46,19 +46,25 @@ jobs:
       - run: apk add composer libxml2-dev php-xml
       #- run: pecl install pcov
       #- run: docker-php-ext-enable pcov
-      #- run: docker-php-ext-install dom
-      - run: docker-php-ext-enable dom
+      - run: docker-php-ext-install dom
+      #- run: docker-php-ext-enable dom
       - run: php -v
+      - run: |
+          pecl install xdebug \
+          && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
+          && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
+          && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
       - run: php -m
+
       #- run: composer config platform.php 8.1
 
       # Download and cache dependencies
-      #- restore_cache:
-      #    keys:
-      #      # "composer.lock" can be used if it is committed to the repo
-      #      - v1-dependencies-{{ checksum "composer.json" }}
-      #      # fallback to using the latest cache if no exact match is found
-      #      - v1-dependencies-
+      - restore_cache:
+          keys:
+            # "composer.lock" can be used if it is committed to the repo
+            - v1-dependencies-{{ checksum "composer.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
       - run: composer update --prefer-dist --no-progress --optimize-autoloader
       #- run: composer install --prefer-dist --no-progress --optimize-autoloader
