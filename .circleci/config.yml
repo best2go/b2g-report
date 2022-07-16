@@ -38,14 +38,14 @@ jobs:
       - checkout
 
       - run: sudo pecl install pcov
-      - run: sudo composer selfupdate
+      - run: sudo composer --no-interaction selfupdate
 
       #- run: sudo apt update # PHP CircleCI 2.0 Configuration File sudo apt install zlib1g-dev libsqlite3-dev
       #- run: sudo docker-php-ext-install zip
 
       - run: php -v
       - run: php -m
-      - run: composer config platform.php 8.1
+      - run: composer --no-interaction config platform.php 8.1
 
       # Download and cache dependencies
       - restore_cache:
@@ -55,7 +55,7 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: composer update --prefer-dist --no-progress --no-suggest --optimize-autoloader
+      - run: composer update --no-interaction --prefer-dist --no-progress --optimize-autoloader
 
       - save_cache:
           key: v1-dependencies-{{ checksum "composer.json" }}
@@ -81,6 +81,7 @@ jobs:
       #- run: ./vendor/bin/codecept run
 
       - run: mkdir -p ./build/logs
-      - run: ./vendor/bin/phpunit --testdox --coverage-text --coverage-clover ./build/logs/coverage.xml --log-junit ./build/logs/junit.xml
+      #- run: ./vendor/bin/phpunit --testdox --coverage-text --coverage-clover ./build/logs/coverage.xml --log-junit ./build/logs/junit.xml
+      - run: ./vendor/bin/phpunit --testdox --coverage-clover ./build/logs/coverage.xml --log-junit ./build/logs/junit.xml
       - store_test_results:
           path: ./build/logs
