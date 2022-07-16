@@ -1,6 +1,6 @@
 # PHP CircleCI 2.0 configuration file
 # See: https://circleci.com/docs/2.0/language-php/
-version: 2
+version: 2.1
 
 #executors:
 #  docker: # Docker using the Base Convenience Image
@@ -80,8 +80,9 @@ jobs:
       #- run: ./vendor/bin/codecept build
       #- run: ./vendor/bin/codecept run
 
-      - run: mkdir -p ./build/logs
       #- run: ./vendor/bin/phpunit --testdox --coverage-text --coverage-clover ./build/logs/coverage.xml --log-junit ./build/logs/junit.xml
-      - run: ./vendor/bin/phpunit --testdox --coverage-clover ./build/logs/coverage.xml --log-junit ./build/logs/junit.xml
+      - run: ./vendor/bin/phpunit --testdox --coverage-clover coverage.xml --log-junit ./build/logs/junit.xml
+      - run: bash <(curl -s https://codecov.io/bash)
+
       - store_test_results:
           path: ./build/logs
