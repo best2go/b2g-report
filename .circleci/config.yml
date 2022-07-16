@@ -2,6 +2,9 @@
 # See: https://circleci.com/docs/2.0/language-php/
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@3.2.3
+
 #executors:
 #  docker: # Docker using the Base Convenience Image
 #    docker:
@@ -81,8 +84,8 @@ jobs:
       #- run: ./vendor/bin/codecept run
 
       #- run: ./vendor/bin/phpunit --testdox --coverage-text --coverage-clover ./build/logs/coverage.xml --log-junit ./build/logs/junit.xml
-      - run: ./vendor/bin/phpunit --testdox --coverage-clover coverage.xml --log-junit ./build/logs/junit.xml
+      - run: ./vendor/bin/phpunit --testdox --coverage-clover ./build/coverage.xml --log-junit ./build/junit.xml
       - run: bash <(curl -s https://codecov.io/bash)
 
       - store_test_results:
-          path: ./build/logs
+          path: ./build
