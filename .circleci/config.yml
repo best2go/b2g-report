@@ -50,7 +50,7 @@ jobs:
       #- run: docker-php-ext-enable dom
       - run: php -v
       - run: php -m
-      - run: composer config platform.php 8.1
+      #- run: composer config platform.php 8.1
 
       # Download and cache dependencies
       - restore_cache:
